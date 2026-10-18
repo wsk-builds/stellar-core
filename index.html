@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:," />
+<title>星核 · Stellar Core</title>
+<style>
+  :root { --ink: rgba(255, 244, 226, 0.92); --dim: rgba(255, 240, 220, 0.5); --line: rgba(255, 230, 190, 0.22); }
+  html, body { margin: 0; height: 100%; background: #030306; overflow: hidden; }
+  canvas { display: block; outline: none; }
+  body { font-family: "Cormorant Garamond", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif; color: var(--ink); }
+  #ui { position: fixed; inset: 0; pointer-events: none; transition: opacity 0.9s ease; }
+  #ui.hidden { opacity: 0; }
+  .title { position: absolute; left: 4.2vw; top: 6vh; letter-spacing: 0.08em; }
+  .title .zh { font-size: 34px; font-weight: 300; letter-spacing: 0.42em; }
+  .title .en { margin-top: 6px; font-size: 12px; letter-spacing: 0.55em; color: var(--dim); text-transform: uppercase; font-family: "Helvetica Neue", Arial, sans-serif; }
+  .title .rule { width: 64px; height: 1px; background: linear-gradient(90deg, var(--ink), transparent); margin: 18px 0 14px; }
+  .title .sub { font-size: 13px; color: var(--dim); line-height: 1.9; letter-spacing: 0.12em; }
+  .state { position: absolute; right: 4.2vw; top: 6vh; text-align: right; font-family: "Helvetica Neue", Arial, sans-serif; }
+  .state .k { font-size: 10px; letter-spacing: 0.5em; color: var(--dim); }
+  .state .v { margin-top: 8px; font-size: 15px; letter-spacing: 0.4em; font-family: "Noto Serif CJK SC", serif; transition: color 1.2s; }
+  .hints, .title, .state { text-shadow: 0 0 12px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.9); }
+  .hints { position: absolute; left: 50%; bottom: 4.5vh; transform: translateX(-50%); display: flex; gap: 30px; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11px; letter-spacing: 0.18em; color: var(--dim); white-space: nowrap; }
+  .hints span b { color: var(--ink); font-weight: 400; border: 1px solid var(--line); border-radius: 3px; padding: 2px 7px; margin-right: 8px; font-size: 10px; }
+  .hints span i { font-style: normal; font-family: "Noto Serif CJK SC", serif; margin-right: 6px; color: var(--ink); opacity: 0.8; }
+  #veil { position: fixed; inset: 0; background: #000; pointer-events: none; transition: opacity 2.4s ease; }
+  #veil.off { opacity: 0; }
+  @media (max-width: 760px) { .hints { flex-wrap: wrap; justify-content: center; gap: 10px 18px; white-space: normal; width: 92vw; } .title .zh { font-size: 26px; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="ui">
+  <div class="title">
+    <div class="zh">星核</div>
+    <div class="en">Stellar Core</div>
+    <div class="rule"></div>
+    <div class="sub">光、秩序与引力的原点<br/>an origin of light, order &amp; gravity</div>
+  </div>
+  <div class="state"><div class="k">STATE · 状态</div><div class="v" id="stateLabel">炽 · STORM</div></div>
+  <div class="hints">
+    <span><b>DRAG</b><i>拖动</i>orbit</span>
+    <span><b>SCROLL</b><i>滚轮</i>zoom</span>
+    <span><b>CLICK</b><i>点水面</i>ripple</span>
+    <span><b>SPACE</b><i>空格</i>shift state</span>
+    <span><b>H</b><i>隐藏</i>hide UI</span>
+  </div>
+</div>
+<div id="veil"></div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
